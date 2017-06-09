@@ -28,6 +28,7 @@
   "dependencies": {
     "glamor": "^2.20.25",
     "glamorous": "^3.22.1",
+    "mobx-state-tree": "^0.6.3",
     "react": "^15.5.4",
     "react-dom": "^15.5.4"
   }
