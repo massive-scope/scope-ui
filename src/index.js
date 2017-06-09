@@ -12,7 +12,8 @@ render(
             <Button><i className="fa fa-trash-o"/> Remove</Button>
         </ToolBar>
         <Table>
-            <Row/>
+            <Row title="asdf"/>
+            <Row title="jklö"/>
         </Table>
     </div>,
     document.getElementById('root')
