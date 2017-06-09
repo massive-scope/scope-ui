@@ -6,7 +6,8 @@ import Row from './datagrid/Row';
 render(
     <div>
         <Table>
-            <Row/>
+            <Row title="asdf"/>
+            <Row title="jklö"/>
         </Table>
     </div>,
     document.getElementById('root')
