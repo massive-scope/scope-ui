@@ -9,7 +9,7 @@ render(
     <div>
         <ToolBar>
             <Button><i className="fa fa-plus-square-o"/> Add</Button>
-            <Button><i className="fa fa-trash-o"/> Remove</Button>
+            <Button type="warning" status="disabled"><i className="fa fa-trash-o"/> Remove</Button>
         </ToolBar>
         <Table>
             <Row title="asdf"/>

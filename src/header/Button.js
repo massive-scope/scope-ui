@@ -13,47 +13,71 @@ const staticStyles = {
     fontSize: '1rem',
     borderRadius: '0.25rem',
     transition: 'all 0.2s ease-in-out',
+    margin: '0 1rem 0 0',
 
     '&:focus, &:hover': {
         textDecoration: 'none',
+        outline: '0'
+    },
 
-        color: '#fff',
-        backgroundColor: '#025aa5',
-        borderColor: '#01549b',
+    '&:last-child': {
+        margin: '0'
     }
 };
 
-const StyledButton = glamorous.a({
-    display: 'inline-block',
-    fontWeight: 'normal',
-    lineHeight: '1.25',
-    textAlign: 'center',
-    whiteSpace: 'nowrap',
-    verticalAlign: 'middle',
-    border: '1px solid transparent',
-    padding: '0.5rem 1rem',
-    fontSize: '1rem',
-    borderRadius: '0.25rem',
-    transition: 'all 0.2s ease-in-out',
+const colors = {
+    primary: '#fff',
+    warning: '#fff'
+};
+const backgroundColors = {
+    primary: '#13BF94',
+    warning: '#F25E3D'
+};
+const borderColors = {
+    primary: '#13BF94',
+    warning: '#F25E3D'
+};
+const focusBackgroundColors = {
+    primary: '#12AE87',
+    warning: '#DC5638'
+};
+const focusBorderColors = {
+    primary: '#12BA90',
+    warning: '#D65335'
+};
+const boxShadows = {
+    primary: 'rgba(19, 191, 148, 0.25)',
+    warning: 'rgba(242, 94, 61, 0.25)'
+};
 
-    color: '#fff',
-    backgroundColor: '#0275d8',
-    borderColor: '#0275d8',
-
+const dynamicStyles = props => ({
+    color: colors[props.type],
+    backgroundColor: backgroundColors[props.type],
+    borderColor: borderColors[props.type],
 
     '&:focus, &:hover': {
-        textDecoration: 'none',
+        color: colors[props.type],
+        backgroundColor: focusBackgroundColors[props.type],
+        borderColor: focusBorderColors[props.type],
+        boxShadow: '0 0 0 2px ' + boxShadows[props.type]
+    },
 
-        color: '#fff',
-        backgroundColor: '#025aa5',
-        borderColor: '#01549b',
-    }
+    cursor: props.status === 'disabled' ? 'not-allowed' : 'pointer',
+    opacity: props.status === 'disabled' ? .65 : 1
 });
 
+const StyledButton = glamorous.a(staticStyles, dynamicStyles);
+
 export default class Button extends React.Component {
+
+    static defaultProps = {
+        type: 'primary',
+        status: null
+    };
+
     render() {
         return (
-            <StyledButton>
+            <StyledButton type={this.props.type} status={this.props.status}>
                 {this.props.children}
             </StyledButton>
         );
