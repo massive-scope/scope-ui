@@ -25,6 +25,8 @@
     "webpack": "^2.6.1"
   },
   "dependencies": {
+    "glamor": "^2.20.25",
+    "glamorous": "^3.22.1",
     "react": "^15.5.4",
     "react-dom": "^15.5.4"
   }
