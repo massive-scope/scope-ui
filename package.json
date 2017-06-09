@@ -26,8 +26,10 @@
     "webpack": "^2.6.1"
   },
   "dependencies": {
+    "apollo-client": "^1.4.1",
     "glamor": "^2.20.25",
     "glamorous": "^3.22.1",
+    "mobx": "^3.1.13",
     "mobx-state-tree": "^0.6.3",
     "react": "^15.5.4",
     "react-dom": "^15.5.4"
