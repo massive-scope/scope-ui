@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 
 const staticStyles = {
@@ -55,7 +56,7 @@ const dynamicStyles = props => ({
     backgroundColor: backgroundColors[props.type],
     borderColor: borderColors[props.type],
 
-    '&:focus, &:hover': {
+    '&:focus, &:hover': props.status === 'disabled' ? {  } : {
         color: colors[props.type],
         backgroundColor: focusBackgroundColors[props.type],
         borderColor: focusBorderColors[props.type],
@@ -63,12 +64,17 @@ const dynamicStyles = props => ({
     },
 
     cursor: props.status === 'disabled' ? 'not-allowed' : 'pointer',
-    opacity: props.status === 'disabled' ? .65 : 1
+    opacity: props.status === 'disabled' ? .65 : null,
+    pointerEvents: props.status === 'disabled' ? 'none' : null
 });
 
 const StyledButton = glamorous.a(staticStyles, dynamicStyles);
 
 export default class Button extends React.Component {
+
+    static propTypes = {
+        onClick: PropTypes.func,
+    }
 
     static defaultProps = {
         type: 'primary',
@@ -77,7 +83,7 @@ export default class Button extends React.Component {
 
     render() {
         return (
-            <StyledButton type={this.props.type} status={this.props.status}>
+            <StyledButton type={this.props.type} status={this.props.status} onClick={this.props.onClick}>
                 {this.props.children}
             </StyledButton>
         );
