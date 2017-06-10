@@ -14,7 +14,7 @@ const ActivityStore = types.model("ActivityStore", {
     loadActivities() {
         const client = new ApolloClient({
             networkInterface: createNetworkInterface({
-                uri: 'http://172.22.8.206:8000/graphql',
+                uri: 'http://172.22.8.206:8000/graphql?apikey=test',
             }),
         });
 
