@@ -10,6 +10,11 @@ const Activity = types.model("Activity", {
 const ActivityStore = types.model("ActivityStore", {
     activities: types.array(Activity),
     selected: types.array(types.string),
+
+    // utilities
+    findTodoById: function(id) {
+        return this.activities.find(activity => activity.id === id)
+    }
 },
 {
     loadActivities() {
@@ -63,7 +68,6 @@ const ActivityStore = types.model("ActivityStore", {
                 mutation: gql`mutation ActivityDelete($id: Int) {
                   activity: activityDelete(id: $id) {
                     id
-                    title
                   }
                 }`,
                 variables: {
@@ -84,7 +88,7 @@ const ActivityStore = types.model("ActivityStore", {
     },
 
     removeActivity(result) {
-        this.activities.pop();
+        this.activities.remove(this.findTodoById(result.data.activity.id))
     },
 
     toggleSelected(id) {
