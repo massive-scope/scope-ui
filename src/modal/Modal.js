@@ -83,7 +83,7 @@ export default class Modal extends React.Component {
     static propTypes = {
         headline: PropTypes.string,
         onCancel: PropTypes.func,
-        onSave: PropTypes.func,
+        onSubmit: PropTypes.func,
         backdrop: PropTypes.bool
     };
 
@@ -91,6 +91,11 @@ export default class Modal extends React.Component {
     cancel(event) {
         this.props.onCancel();
     }
+
+    static defaultProps = {
+        submitButtonType: 'primary',
+        submitButtonTitle: 'Save'
+    };
 
     render() {
         return (
@@ -101,12 +106,13 @@ export default class Modal extends React.Component {
                             <Head>
                                 <h2>{this.props.headline}</h2>
                             </Head>
-                            <Body>
-                            {this.props.children}
-                            </Body>
+                            { this.props.children && <Body>
+                                {this.props.children}
+                                </Body> }
                             <Footer>
-                                <Button onClick={this.props.onCancel} type="warning">Cancel</Button>
-                                <Button onClick={this.props.onSave}>Save</Button>
+                                <A onClick={this.props.onCancel} padding="0.5rem 1rem" cursor="pointer">Cancel</A>
+                                <Button onClick={this.props.onSubmit}
+                                        type={this.props.submitButtonType}>{this.props.submitButtonTitle}</Button>
                             </Footer>
                         </Content>
                     </Dialog>

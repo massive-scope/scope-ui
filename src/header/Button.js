@@ -19,10 +19,6 @@ const staticStyles = {
     '&:focus, &:hover': {
         textDecoration: 'none',
         outline: '0'
-    },
-
-    '&:last-child': {
-        margin: '0'
     }
 };
 

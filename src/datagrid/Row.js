@@ -1,5 +1,6 @@
 import React from 'react';
 import glamorous, {Tr, Input} from 'glamorous';
+import Button from './../header/Button';
 
 const TableRow = glamorous.tr({
     backgroundColor: '#fff',
@@ -8,6 +9,12 @@ const TableRow = glamorous.tr({
     height: 55,
     '&:hover': {
         backgroundColor: '#eee',
+    },
+    '&:hover a': {
+        display: 'block',
+    },
+    '& a': {
+        display: 'none',
     }
 });
 
@@ -27,6 +34,10 @@ export default class Row extends React.PureComponent {
         this.props.onChange(this.props.id);
     }
 
+    onTimeTrackingClick = () => {
+        this.props.onTimeTrackingClick(this.props.id);
+    }
+
     render() {
         return (
             <TableRow>
@@ -38,6 +49,7 @@ export default class Row extends React.PureComponent {
                     />
                 </TableCell>
                 <TableCell>{this.props.title}</TableCell>
+                <TableCell shrink={true}><Button onClick={this.onTimeTrackingClick}><i className="fa fa-clock-o"/></Button></TableCell>
             </TableRow>
         );
     }

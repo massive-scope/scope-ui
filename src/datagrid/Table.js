@@ -10,6 +10,10 @@ export default class DatagridTable extends React.Component {
         this.props.store.toggleSelected(value);
     }
 
+    onTimeTrackingClick = (value) => {
+        this.props.onTimeTrackingClick()
+    }
+
     render() {
         return (
             <Table width="calc(100% - 160px)"
@@ -19,7 +23,11 @@ export default class DatagridTable extends React.Component {
                 cellPadding={0}
             >
                 <tbody>
-                    {this.props.store.activities.map((row) => <Row key={row.id} id={row.id} title={row.title} onChange={this.onRowChange}/>)}
+                    {this.props.store.activities.map((row) => <Row key={row.id}
+                                                                   id={row.id}
+                                                                   title={row.title}
+                                                                   onChange={this.onRowChange}
+                                                                   onTimeTrackingClick={this.onTimeTrackingClick}/>)}
                 </tbody>
             </Table>
         );
