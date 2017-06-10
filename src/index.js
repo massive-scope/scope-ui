@@ -48,6 +48,10 @@ class App extends React.Component {
     handleRemoveClick = () => this.setState({isShowingRemoveModal: true});
     handleRemoveCancel = () => this.setState({isShowingRemoveModal: false});
 
+    handleRemove = () => {
+        store.removeSelected();
+        this.setState({isShowingRemoveModal: false});
+    }
 
     updateInputValue = function(evt) {
         this.setState({

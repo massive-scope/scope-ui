@@ -51,6 +51,28 @@ const ActivityStore = types.model("ActivityStore", {
         }).then(this.addActivity);
     },
 
+    removeSelected() {
+        const client = new ApolloClient({
+            networkInterface: createNetworkInterface({
+                uri: 'http://172.22.10.241:8000/graphql?apikey=test',
+            }),
+        });
+
+        for (let id in this.selected) {
+            client.mutate({
+                mutation: gql`mutation ActivityDelete($id: Int) {
+                  activity: activityDelete(id: $id) {
+                    id
+                    title
+                  }
+                }`,
+                variables: {
+                    id: id
+                }
+            }).then(this.removeActivity);
+        }
+    },
+
     updateActivities(result) {
         result.data.activities.items.forEach((item) => {
             this.activities.push(item);
@@ -59,6 +81,10 @@ const ActivityStore = types.model("ActivityStore", {
 
     addActivity(result) {
         this.activities.push(result.data.activity);
+    },
+
+    removeActivity(result) {
+        console.log(result);
     },
 
     toggleSelected(id) {
