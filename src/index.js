@@ -15,14 +15,31 @@ class App extends React.Component {
     state = {
         isShowingAddModal: false,
         isShowingRemoveModal: false,
+        input: '',
         selected: false
     };
 
     handleAddClick = () => this.setState({isShowingAddModal: true});
     handleAddCancel = () => this.setState({isShowingAddModal: false});
 
+    handleAddSave = function() {
+        store.saveActivity(this.state.input);
+        this.setState({isShowingAddModal: false});
+
+        this.setState({
+            input: ''
+        });
+    }.bind(this);
+
     handleRemoveClick = () => this.setState({isShowingAddModal: true});
     handleRemoveCancel = () => this.setState({isShowingAddModal: false});
+
+
+    updateInputValue = function(evt) {
+        this.setState({
+            input: evt.target.value
+        });
+    };
 
     render() {
         return (
@@ -38,8 +55,9 @@ class App extends React.Component {
                 <Table data={store.activities} />
 
                 { this.state.isShowingAddModal && <Modal onCancel={this.handleAddCancel}
+                    onSave={this.handleAddSave}
                     headline="Add Task">
-                        <input type="text" placeholder="Title"/>
+                        <input value={this.state.input} onChange={evt => this.updateInputValue(evt)} type="text" placeholder="Title"/>
                 </Modal>}
                 { this.state.isShowingRemoveModal && <Modal onCancel={this.handleRemoveCancel}/> }
             </div>

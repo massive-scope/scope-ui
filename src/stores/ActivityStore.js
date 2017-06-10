@@ -14,7 +14,7 @@ const ActivityStore = types.model("ActivityStore", {
     loadActivities() {
         const client = new ApolloClient({
             networkInterface: createNetworkInterface({
-                uri: 'http://172.22.8.206:8000/graphql?apikey=test',
+                uri: 'http://127.0.0.1:8000/graphql?apikey=test',
             }),
         });
 
@@ -30,10 +30,34 @@ const ActivityStore = types.model("ActivityStore", {
         }).then(this.updateActivities);
     },
 
+    saveActivity(title) {
+        const client = new ApolloClient({
+            networkInterface: createNetworkInterface({
+                uri: 'http://127.0.0.1:8000/graphql?apikey=test',
+            }),
+        });
+
+        client.mutate({
+            mutation: gql`mutation ActivityCreate($title: String) {
+              activity: activityCreate(package: 1, title: $title) {
+                id
+                title
+              }
+            }`,
+            variables: {
+                title: title
+            }
+        }).then(this.addActivity);
+    },
+
     updateActivities(result) {
         result.data.activities.items.forEach((item) => {
             this.activities.push(item);
         });
+    },
+
+    addActivity(result) {
+        this.activities.push(result.data.activity);
     }
 });
 

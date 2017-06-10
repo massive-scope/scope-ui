@@ -83,6 +83,7 @@ export default class Modal extends React.Component {
     static propTypes = {
         headline: PropTypes.string,
         onCancel: PropTypes.func,
+        onSave: PropTypes.func,
         backdrop: PropTypes.bool
     };
 
@@ -105,7 +106,7 @@ export default class Modal extends React.Component {
                             </Body>
                             <Footer>
                                 <Button onClick={this.props.onCancel} type="warning">Cancel</Button>
-                                <Button>Save</Button>
+                                <Button onClick={this.props.onSave}>Save</Button>
                             </Footer>
                         </Content>
                     </Dialog>
