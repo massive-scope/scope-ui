@@ -23,11 +23,19 @@ const TableCell = glamorous.td(
 );
 
 export default class Row extends React.PureComponent {
+    onClick = () => {
+        this.props.onChange(this.props.id);
+    }
+
     render() {
         return (
             <TableRow>
                 <TableCell shrink={true}>
-                    <Input type="checkbox" borderColor="#091f19"/>
+                    <Input type="checkbox"
+                        borderColor="#091f19"
+                        checked={this.props.selected}
+                        onChange={this.onClick}
+                    />
                 </TableCell>
                 <TableCell>{this.props.title}</TableCell>
             </TableRow>

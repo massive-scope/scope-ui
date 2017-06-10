@@ -64,7 +64,7 @@ class App extends React.Component {
                         <i className="fa fa-trash-o"/> Remove
                     </Button>
                 </ToolBar>
-                <Table data={store.activities} />
+                <Table store={store} />
 
                 { this.state.isShowingAddModal && <Modal onCancel={this.handleAddCancel}
                     onSave={this.handleAddSave}
