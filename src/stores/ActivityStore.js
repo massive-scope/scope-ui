@@ -67,7 +67,7 @@ const ActivityStore = types.model("ActivityStore", {
                   }
                 }`,
                 variables: {
-                    id: id
+                    id: parseInt(id)
                 }
             }).then(this.removeActivity);
         });
@@ -84,7 +84,7 @@ const ActivityStore = types.model("ActivityStore", {
     },
 
     removeActivity(result) {
-        console.log(result);
+        this.activities.pop();
     },
 
     toggleSelected(id) {
