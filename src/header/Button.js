@@ -73,8 +73,8 @@ const StyledButton = glamorous.a(staticStyles, dynamicStyles);
 export default class Button extends React.Component {
 
     static propTypes = {
-        onClick: PropTypes.func,
-    }
+        onClick: PropTypes.func
+    };
 
     static defaultProps = {
         type: 'primary',

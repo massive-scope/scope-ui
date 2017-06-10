@@ -5,7 +5,7 @@ import Button from './header/Button';
 import Table from './datagrid/Table';
 import Row from './datagrid/Row';
 import ActivityStore from './stores/ActivityStore';
-import Modal from './modal/Modal';
+import Modal, {ModalHead, ModalBody} from './modal/Modal';
 
 const store = ActivityStore.create({activities: []});
 store.loadActivities();
@@ -15,14 +15,14 @@ class App extends React.Component {
     state = {
         isShowingAddModal: false,
         isShowingRemoveModal: false,
-        selected: false,
-    }
+        selected: false
+    };
 
-    handleAddClick = () => this.setState({isShowingAddModal: true})
-    handleAddClose = () => this.setState({isShowingAddModal: false})
+    handleAddClick = () => this.setState({isShowingAddModal: true});
+    handleAddCancel = () => this.setState({isShowingAddModal: false});
 
-    handleRemoveClick = () => this.setState({isShowingAddModal: true})
-    handleRemoveClose = () => this.setState({isShowingAddModal: false})
+    handleRemoveClick = () => this.setState({isShowingAddModal: true});
+    handleRemoveCancel = () => this.setState({isShowingAddModal: false});
 
     render() {
         return (
@@ -37,8 +37,11 @@ class App extends React.Component {
                 </ToolBar>
                 <Table data={store.activities} />
 
-                { this.state.isShowingAddModal && <Modal onClose={this.handleAddClose}/> }
-                { this.state.isShowingRemoveModal && <Modal onClose={this.handleRemoveClose}/> }
+                { this.state.isShowingAddModal && <Modal onCancel={this.handleAddCancel}
+                    headline="Add Task">
+                        <input type="text" placeholder="Title"/>
+                </Modal>}
+                { this.state.isShowingRemoveModal && <Modal onCancel={this.handleRemoveCancel}/> }
             </div>
         );
     }
