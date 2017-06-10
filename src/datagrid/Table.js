@@ -1,6 +1,9 @@
 import React from 'react';
 import {Table} from 'glamorous';
+import Row from './Row.js';
+import {observer} from 'mobx-react';
 
+@observer
 export default class DatagridTable extends React.Component {
     render() {
         return (
@@ -11,7 +14,7 @@ export default class DatagridTable extends React.Component {
                 cellPadding={0}
             >
                 <tbody>
-                    {this.props.children}
+                    {this.props.data.map((row) => <Row key={row.id} title={row.title}/>)}
                 </tbody>
             </Table>
         );
