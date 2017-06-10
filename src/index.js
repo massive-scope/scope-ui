@@ -7,8 +7,9 @@ import Table from './datagrid/Table';
 import Row from './datagrid/Row';
 import ActivityStore from './stores/ActivityStore';
 import Modal from './modal/Modal';
+import {observer} from 'mobx-react';
 
-const store = ActivityStore.create({activities: []});
+const store = ActivityStore.create({activities: [], selected: []});
 store.loadActivities();
 
 const Input = glamorous.input({
@@ -22,6 +23,7 @@ const Input = glamorous.input({
     boxSizing: 'border-box'
 });
 
+@observer
 class App extends React.Component {
 
     state = {
@@ -60,7 +62,7 @@ class App extends React.Component {
                     <Button onClick={this.handleAddClick}>
                         <i className="fa fa-plus-square-o"/> Add
                     </Button>
-                    <Button onClick={this.handleRemoveClick} type="warning" status={!this.state.selected && 'disabled'}>
+                    <Button onClick={this.handleRemoveClick} type="warning" status={store.selected.length === 0 && 'disabled'}>
                         <i className="fa fa-trash-o"/> Remove
                     </Button>
                 </ToolBar>

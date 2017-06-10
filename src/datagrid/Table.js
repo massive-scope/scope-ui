@@ -6,20 +6,8 @@ import {observable} from 'mobx';
 
 @observer
 export default class DatagridTable extends React.Component {
-    @observable selectedRows = [];
-
-    constructor(props) {
-        super(props);
-        this.selectedRows = [];
-    }
-
     onRowChange = (value) => {
-        const index = this.selectedRows.indexOf(value);
-        if (index === -1) {
-            this.selectedRows.push(value);
-        } else {
-            this.selectedRows.splice(index, 1);
-        }
+        this.props.store.toggleSelected(value);
     }
 
     render() {

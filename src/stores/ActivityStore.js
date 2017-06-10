@@ -9,6 +9,7 @@ const Activity = types.model("Activity", {
 
 const ActivityStore = types.model("ActivityStore", {
     activities: types.array(Activity),
+    selected: types.array(types.string),
 },
 {
     loadActivities() {
@@ -58,6 +59,15 @@ const ActivityStore = types.model("ActivityStore", {
 
     addActivity(result) {
         this.activities.push(result.data.activity);
+    },
+
+    toggleSelected(id) {
+        const index = this.selected.indexOf(id);
+        if (index === -1) {
+            this.selected.push(id);
+        } else {
+            this.selected.splice(index, 1);
+        }
     }
 });
 
