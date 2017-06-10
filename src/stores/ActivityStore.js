@@ -58,7 +58,7 @@ const ActivityStore = types.model("ActivityStore", {
             }),
         });
 
-        for (let id in this.selected) {
+        this.selected.forEach((id) => {
             client.mutate({
                 mutation: gql`mutation ActivityDelete($id: Int) {
                   activity: activityDelete(id: $id) {
@@ -70,7 +70,7 @@ const ActivityStore = types.model("ActivityStore", {
                     id: id
                 }
             }).then(this.removeActivity);
-        }
+        });
     },
 
     updateActivities(result) {
