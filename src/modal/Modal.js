@@ -76,7 +76,7 @@ const Backdrop = glamorous.div({
     opacity: 0.5
 });
 
-const { ESC } = Keys;
+const { ESC, ENTER } = Keys;
 
 export default class Modal extends React.Component {
 
@@ -90,6 +90,11 @@ export default class Modal extends React.Component {
     @keydown(ESC)
     cancel(event) {
         this.props.onCancel();
+    }
+
+    @keydown(ENTER)
+    submit(event) {
+        this.props.onSubmit();
     }
 
     static defaultProps = {
